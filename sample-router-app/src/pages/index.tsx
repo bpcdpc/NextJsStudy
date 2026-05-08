@@ -1,12 +1,16 @@
-import styles from "./index.module.css";
-
+import SaleItem from "@/components/SaleItem";
+// import styles from "./index.module.css";
+import sales from "@/mock/sales.json";
 import SearchBarLayout from "@/components/SearchBarLayout";
 
 export default function Home() {
   return (
-    <div className={styles.title}>
-      <h1>This is an index page.</h1>
-    </div>
+    <section>
+      <h3>최신 등록 상품</h3>
+      {sales.map((item) => (
+        <SaleItem key={item.productId} {...item} />
+      ))}
+    </section>
   );
 }
 

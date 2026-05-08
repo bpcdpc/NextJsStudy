@@ -1,5 +1,5 @@
 import { KeyboardEvent, ChangeEvent, useState, useRef } from "react";
-import styles from "./SearchBarLayout.module.css";
+import style from "./SearchBarLayout.module.css";
 import { useRouter } from "next/router";
 
 export default function SearchBarLayout({
@@ -26,7 +26,7 @@ export default function SearchBarLayout({
 
   return (
     <section>
-      <div className={styles.searchbar_container}>
+      <div className={style.searchbar_container}>
         <input
           type="text"
           placeholder="검색어를 입력하시오."
