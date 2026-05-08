@@ -1,4 +1,5 @@
 import Link from "next/link";
+import style from "./RootLayout.module.css";
 
 export default function RootLayout({
   children,
@@ -6,11 +7,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div className={style.container}>
       <header>
-        <h1>
-          <Link href="/">🧅 양파마켓</Link>
-        </h1>
+        <Link href="/">🧅 양파마켓</Link>
       </header>
       <main>{children}</main>
       <footer>&copy; 2006. 양파마켓</footer>
