@@ -12,6 +12,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  min-height: 400px;
 }
 
 .cover_img_container::before {
@@ -21,7 +22,7 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-  content: '';
+  content: "";
 }
 /* 
 .cover_img_container > Image {

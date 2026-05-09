@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import RootLayout from "@/components/RootLayout";
+import SearchBarLayout from "@/components/SearchBarLayout";
 import { NextPage } from "next";
 import { ReactNode } from "react";
 type NextPageWithLayout = NextPage & {
@@ -12,5 +13,10 @@ export default function App({
   pageProps,
 }: AppProps & { Component: NextPageWithLayout }) {
   const getLayout = Component.getLayout || ((page) => page);
+  const getLayoutInternal = (page: React.ReactNode) => (
+    <SearchBarLayout>{page}</SearchBarLayout>
+  );
+  const getLayoutAlone = getLayoutInternal || ((page) => page);
+
   return <RootLayout>{getLayout(<Component {...pageProps} />)}</RootLayout>;
 }
