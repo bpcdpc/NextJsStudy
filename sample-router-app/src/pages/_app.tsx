@@ -16,7 +16,6 @@ export default function App({
   const getLayoutInternal = (page: React.ReactNode) => (
     <SearchBarLayout>{page}</SearchBarLayout>
   );
-  const getLayoutAlone = getLayoutInternal || ((page) => page);
 
   return <RootLayout>{getLayout(<Component {...pageProps} />)}</RootLayout>;
 }

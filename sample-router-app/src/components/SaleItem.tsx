@@ -10,7 +10,7 @@ export default function SaleItem({
   price,
   photo,
 }: SaleData) {
-  const imageUrl = `https://styangpa.blob.core.windows.net/yangpa/${photo}`;
+  const imageUrl = `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/${photo}`;
 
   return (
     <Link href={`/sale/${productId}`} className={style.container}>
