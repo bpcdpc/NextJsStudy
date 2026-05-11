@@ -1,24 +1,32 @@
+import { fetchSaleById, fetchSales } from "@/utils/fetchSales";
 import style from "./[id].module.css";
-import type { SaleData } from "@/types/sales";
+
+import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import sales from "@/mock/sales.json";
-import { fetchSaleById } from "@/utils/fetchSales";
 
-export default async function Page() {
-  const router = useRouter();
-  const id = Number(router.query.id);
+export async function getStaticPaths() {
+  const sales = await fetchSales();
 
-  // const product: SaleData[] = sales.filter((item) => item.productId === id);
+  return {
+    paths: sales.map((item) => ({ params: { id: String(item.id) } })),
+    fallback: "blocking",
+  };
+}
 
-  const sale: SaleData[] = await fetchSaleById(id);
-  const product = sale[0];
+export async function getStaticProps(context: GetStaticPropsContext) {
+  const id = context.params!.id;
+  const sales = await fetchSaleById(Number(id));
+  return { props: { sales }, revalidate: 10 }; // ISR (Incremental Static Regeneration : 증분 정적 페이지 재생성)
+}
 
-  if (!product) {
+export default function Page({
+  sales,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+  if (!sales) {
     return <div>일치하는 상품이 없습니다.</div>;
   }
 
-  const { productName, description, price, photo } = product;
+  const { productName, description, price, photo } = sales[0];
 
   const imageUrl = `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/${photo}`;
 

@@ -1,5 +1,5 @@
 export interface SaleData {
-  productId: number;
+  id: number;
   productName: string;
   description: string;
   price: number;

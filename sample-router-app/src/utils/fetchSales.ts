@@ -14,8 +14,11 @@ async function fetchData(url: string): Promise<SaleData[]> {
   }
 }
 
-export async function fetchSales(): Promise<SaleData[]> {
-  const endpoint = `${process.env.NEXT_PUBLIC_API_URL}/sales`;
+export async function fetchSales(q?: string): Promise<SaleData[]> {
+  let endpoint = `${process.env.NEXT_PUBLIC_API_URL}/sales`;
+  if (q) {
+    endpoint += `?q=${q}`;
+  }
   return fetchData(endpoint);
 }
 

@@ -4,7 +4,7 @@ import type { SaleData } from "@/types/sales";
 import Image from "next/image";
 
 export default function SaleItem({
-  productId,
+  id,
   productName,
   description,
   price,
@@ -13,7 +13,7 @@ export default function SaleItem({
   const imageUrl = `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/${photo}`;
 
   return (
-    <Link href={`/sale/${productId}`} className={style.container}>
+    <Link href={`/sale/${id}`} className={style.container}>
       <Image
         src={imageUrl}
         alt={`${productName}의 사진`}
