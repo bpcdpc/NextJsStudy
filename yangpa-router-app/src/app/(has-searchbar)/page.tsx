@@ -1,11 +1,17 @@
-"use client";
+import SearchBar from "@/components/SearchBar";
+import SaleItem from "@/components/SaleItem";
 
-export default function Home() {
-  console.log("인덱스 페이지 컴포넌트");
+import { fetchSalesRecent } from "@/utils/fetchSales";
+
+export default async function Home() {
+  const sales = await fetchSalesRecent();
+
   return (
-    <div>
-      <h1>인덱스페이지입니다.</h1>
-      <button onClick={() => console.log("클릭")}>클릭</button>
-    </div>
+    <>
+      <h3>최신 등록 상품</h3>
+      {sales?.map((item) => (
+        <SaleItem key={item.id} {...item} />
+      ))}
+    </>
   );
 }

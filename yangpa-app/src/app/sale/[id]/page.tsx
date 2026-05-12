@@ -1,5 +1,7 @@
-import style from "./[id].module.css";
+import style from "@/app/sale/[id]/page.module.css";
 import Image from "next/image";
+import { SaleData } from "@/types/sale";
+import { ENV } from "@/config/env";
 import { fetchSaleById } from "@/utils/fetchSales";
 
 export default async function Page({
@@ -8,17 +10,11 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const ProductNumber = Number(id);
+  const productNumber: number = Number(id);
+  const sales = await fetchSaleById(productNumber);
 
-  const sale = await fetchSaleById(ProductNumber);
-
-  if (!sale[0]) {
-    return <div>일치하는 상품이 없습니다.</div>;
-  }
-
-  const { productName, description, price, photo } = sale[0];
-
-  const imageUrl = `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/${photo}`;
+  const { productName, description, price, photo } = sales[0];
+  const imageUrl = `${ENV.IMAGE_URL}/${photo}`;
 
   return (
     <div className={style.container}>
@@ -36,7 +32,7 @@ export default async function Page({
       </div>
       <h2 className={style.title}>{productName}</h2>
       <p className={style.description}>{description}</p>
-      <span className={style.price}>{price.toLocaleString()}원</span>
+      <span className={style.price}>{price}원</span>
     </div>
   );
 }

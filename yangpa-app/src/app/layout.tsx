@@ -1,6 +1,5 @@
 import "./globals.css";
-import style from "./page.module.css";
-
+import style from "@/app/layout.module.css";
 import Link from "next/link";
 
 export default function RootLayout({
@@ -16,7 +15,7 @@ export default function RootLayout({
             <Link href="/">🧅 양파마켓</Link>
           </header>
           <main>{children}</main>
-          <footer>&copy; 2006. 양파마켓</footer>
+          <footer>&copy; 2026 양파마켓</footer>
         </div>
       </body>
     </html>
